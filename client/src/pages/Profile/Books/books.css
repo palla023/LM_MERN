@@ -1,0 +1,70 @@
+input.my-form-input,
+textarea.my-form-input,
+select.my-form-input {
+	min-height: 40px;
+	width: 100%;
+	border: gray 1px solid;
+	padding-left: 10px;
+	font-size: 14px;
+}
+
+textarea.my-form-input {
+	padding-top: 15px;
+	min-height: 60px;
+}
+
+input.my-form-input:focus,
+textarea.my-form-input:focus,
+select.my-form-input:focus {
+	box-shadow: none;
+	outline: none;
+	border: rgb(60, 60, 60) solid 1px;
+}
+
+button.my-form-input {
+	height: 40px;
+}
+
+table {
+	border: 1px solid #cdcdcd;
+}
+
+i {
+	font-size: 18px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.issuespan {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.issuebookheading {
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.error-message {
+	background-color: rgb(188, 94, 94);
+	color: white;
+	padding: 4px;
+	border-radius: 4px;
+	margin-left: 25%
+}
+.validateduserdiv{
+	background-color: #626361;
+	padding: 10px;
+	color: white;
+}
+.validateduserdiv h1{
+	font-size: 15px;
+}

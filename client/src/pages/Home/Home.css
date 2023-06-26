@@ -1,0 +1,53 @@
+.homecarddiv {
+	gap: 10px;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	background-color: #fff;
+}
+
+.homecarddiv h1 {
+	font-size: 16px;
+	color: black;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-top: 20px;
+}
+input.search-input:focus {
+	box-shadow: none;
+	outline: none;
+	border: rgb(60, 60, 60) solid 1px;
+}
+
+.card img {
+	margin: 10px;
+	border-radius: 8px;
+	height:400px;
+	width: 300px;
+}
+
+.available-toggle-button {
+	position: absolute;
+	right: 0;
+	top: 20px;
+	height: 30px;
+	width: 95px;
+	background: #ef5c72;
+	color: #ffffff;
+	font-size: 13px;
+	text-align: center;
+	border-radius: 20px 0 0 20px;
+	padding-top: 5px;
+}
+
+.available {
+	background-color: green;
+}
+
+.not-available {
+	background-color: rgb(199, 26, 26);
+}
+
+.book-description {
+	font-size: 15px;
+	font-weight: 800;
+}

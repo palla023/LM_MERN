@@ -1,0 +1,86 @@
+.Register {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.RegisterWrapper {
+  width: 70%;
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.RegisterLeft,
+.RegisterRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.RegisterLogo {
+  font-size: 50px;
+  font-weight: 800;
+  color: #1775ee;
+  margin-bottom: 10px;
+}
+
+.RegisterDesc {
+  font-size: 24px;
+}
+
+.RegisterBox {
+  height: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.RegisterInput {
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+.RegisterInput:focus {
+  outline: none;
+}
+
+.RegisterButton {
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: #1775ee;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.buttondiv {
+  display: flex;
+  justify-content: center;
+	align-items: center;
+	margin-left: 15%;
+	margin-right: auto;
+  width: 100%;
+  cursor: pointer;
+}
+.RegisterLoginButton {
+  width: 65%;
+  height: 58px;
+  border-radius: 10px;
+  border: none;
+  background-color: #42b72a;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}

@@ -1,0 +1,16 @@
+    .box select {
+	background-color: #0563af;
+	color: white;
+	padding: 6px;
+	width: 90px;
+	border: none;
+	font-size: 15px;
+	outline: none;
+	border-radius: 5px;
+  }
+  
+  
+  .box select option {
+	padding: 30px;
+	border-radius: 10px;
+  }
