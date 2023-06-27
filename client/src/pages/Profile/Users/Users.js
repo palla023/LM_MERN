@@ -35,7 +35,6 @@ const Users = ({ role }) => {
     try {
       dispatch(ShowLoading());
       await updateUserRole(userId, newRole);
-      dispatch(HideLoading());
       message.success("Role updated successfully");
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
@@ -43,6 +42,7 @@ const Users = ({ role }) => {
         )
       );
       getUsers(); // Fetch the updated list of users
+      dispatch(HideLoading());
     } catch (error) {
       dispatch(HideLoading());
       message.error("Failed to update role");
