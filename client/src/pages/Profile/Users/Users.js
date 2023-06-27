@@ -42,13 +42,16 @@ const Users = ({ role }) => {
           user._id === userId ? { ...user, role: newRole } : user
         )
       );
-      getUsers(); // Fetch the updated list of users
+      // Fetch the updated list of users with the updated role
+      const updatedUsers = await getUsers();
+      setUsers(updatedUsers);
     } catch (error) {
       dispatch(HideLoading());
       message.error("Failed to update role");
       console.error("Failed to update role:", error);
     }
   };
+  
   
   
 
