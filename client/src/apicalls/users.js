@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000";
+// const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://library-management-dqov.onrender.com";
 
 // register a user
 export const RegisterUser = async (payload) => {
