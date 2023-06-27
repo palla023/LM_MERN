@@ -24,18 +24,18 @@ mongoose
   .then(() => console.log("DB connection established..."))
   .catch((err) => console.log(err));
 
-  const path = require("path");
-  __dirname = path.resolve();
+  // const path = require("path");
+  // __dirname = path.resolve();
   
-  if (process.env.NODE_ENV === "production") {
-    // Set static folder
-    app.use(express.static(path.join(__dirname, "/client/build")));
+  // if (process.env.NODE_ENV === "production") {
+  //   // Set static folder
+  //   app.use(express.static(path.join(__dirname, "/client/build")));
   
-    // index.html for all page routes
-    app.get("*", (req, res) => {
-      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
-  }
+  //   // index.html for all page routes
+  //   app.get("*", (req, res) => {
+  //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  //   });
+  // }
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on ${process.env.PORT} ...`);
