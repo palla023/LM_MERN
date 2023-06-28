@@ -12,7 +12,6 @@ import { HideLoading, ShowLoading } from "../../redux/loadersSlice";
 export default function Login() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
-  const [auth, setAuth] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,7 +36,7 @@ export default function Login() {
       const response = await LoginUser(formData);
       dispatch(HideLoading());
       localStorage.setItem("token", response.token);
-      setAuth(true);
+      
       toast.success("Login Successful !", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -55,7 +54,6 @@ export default function Login() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setAuth(true);
       navigate("/");
     }
   }, []);
