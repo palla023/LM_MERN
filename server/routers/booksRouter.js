@@ -9,10 +9,10 @@ router.post("/add-book", middleware, async (req, res) => {
   try {
     const newbook = new Books(req.body);
     await newbook.save();
-    res.status(201).json({ message: "NewBook added Successfully", newbook });
+    return res.status(201).json({ message: "NewBook added Successfully", newbook });
   } catch (err) {
     {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 });
@@ -23,10 +23,10 @@ router.put("/update-book/:id", middleware, async (req, res) => {
     const updatedBook = await Books.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.status(200).json({ message: "Book updated Successfully", updatedBook });
+    return res.status(200).json({ message: "Book updated Successfully", updatedBook });
   } catch (err) {
     {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 });
@@ -36,10 +36,10 @@ router.put("/update-book/:id", middleware, async (req, res) => {
 router.delete("/delete-book/:id", middleware, async (req, res) => {
   try {
     const deletedBook = await Books.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Book deleted Successfully", deletedBook });
+    return res.status(200).json({ message: "Book deleted Successfully", deletedBook });
   } catch (err) {
     {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 });

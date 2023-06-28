@@ -33,7 +33,6 @@ export const LoginUser = async (payload) => {
 
 //update user details
 
-// API call
 export const updateUserRole = async (userId, role) => {
   try {
     const response = await axios.put(

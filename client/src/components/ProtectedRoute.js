@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
       dispatch(HideLoading());
       dispatch(SetUser(userDetails));
     } catch (error) {
-      navigate('/login');
+      navigate("/login");
       dispatch(HideLoading());
       console.error(error);
     }
@@ -37,7 +37,11 @@ const ProtectedRoute = ({ children }) => {
   }, []);
 
   if (!user) {
-    return <p>Loading user details...</p>;
+    return (
+      <div className="loading-container">
+        <p className="loading-text">Loading user details...</p>
+      </div>
+    );
   }
   return (
     <div>
@@ -49,7 +53,7 @@ const ProtectedRoute = ({ children }) => {
               LIBRARY MANAGEMENT APP
             </h1>
 
-            <div className="d-flex align-items-center gap-1 bg-white p-1 rounded headerRight">
+            <div className="d-flex align-items-center gap-1 bg-white headerRight">
               <i className="ri-shield-user-line"></i>
               <span
                 className="text-sm underline "
