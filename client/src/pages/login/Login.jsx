@@ -63,13 +63,13 @@ export default function Login() {
   return (
     <div className="login">
       <div className="loginWrapper">
-        <div className="loginLeft col-sm-12 col-md-6">
+        <div className="loginLeft ">
           <h3 className="loginLogo">Library Management App</h3>
           <span className="loginDesc">
             Manages and stores books information electronically.
           </span>
         </div>
-        <div className="loginRight col-sm-12 col-md-6">
+        <div className="loginRight">
           <div className="loginBox">
             <input
               placeholder="Email"
