@@ -57,13 +57,13 @@ export default function Register() {
   return (
     <div className="Register">
       <div className="RegisterWrapper">
-        <div className="RegisterLeft col-sm-12 col-md-6">
+        <div className="RegisterLeft ">
           <h3 className="RegisterLogo">Library Management App</h3>
           <span className="RegisterDesc">
             Manages and stores book information electronically.
           </span>
         </div>
-        <div className="RegisterRight col-sm-12 col-md-6">
+        <div className="RegisterRight">
           <div className="RegisterBox">
             <input
               placeholder="Username"
