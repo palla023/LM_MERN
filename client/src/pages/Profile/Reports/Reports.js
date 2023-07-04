@@ -198,7 +198,7 @@ const Reports = () => {
                 </div>
                 <div className="col-sm-5">
                   <p className="text-muted mb-0">
-                    {reports?.revenue?.totalCollected}
+                    &#8377;{reports?.revenue?.totalCollected}
                   </p>
                 </div>
               </div>
@@ -209,7 +209,7 @@ const Reports = () => {
                 </div>
                 <div className="col-sm-5">
                   <p className="text-muted mb-0">
-                    {reports?.revenue?.rentCollected}
+                  &#8377;{reports?.revenue?.rentCollected}
                   </p>
                 </div>
               </div>
@@ -220,7 +220,7 @@ const Reports = () => {
                 </div>
                 <div className="col-sm-5">
                   <p className="text-muted mb-0">
-                    {reports?.revenue?.fineCollected}
+                  &#8377;{reports?.revenue?.fineCollected}
                   </p>
                 </div>
               </div>
@@ -231,7 +231,7 @@ const Reports = () => {
                 </div>
                 <div className="col-sm-5">
                   <p className="text-muted mb-0">
-                    {reports?.revenue?.rentPending}
+                  &#8377;{reports?.revenue?.rentPending}
                   </p>
                 </div>
               </div>

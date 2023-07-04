@@ -59,14 +59,13 @@ const IssueForm = ({
   const onIssue = async () => {
     try {
       dispatch(ShowLoading());
-
-      if (selectedBook.availableCopies === 0) {
-        message.error("Book is not available for issuing.");
-        dispatch(HideLoading());
-        return;
-      }
       let response = null;
       if (type !== "edit") {
+        if (selectedBook.availableCopies === 0) {
+          message.error("Book is not available for issuing.");
+          dispatch(HideLoading());
+          return;
+        }
         response = await IssueBook({
           //as per the MongoDb only we can send values
           book: selectedBook._id,
@@ -128,7 +127,7 @@ const IssueForm = ({
       footer={null}
       centered
     >
-      <div className="flex flex-col gap-2">
+      <div>
         <h1 className="text-secondary issuebookheading ">
           {type === "edit" ? "Edit / Renew Issue" : "Issue Book"}
         </h1>
@@ -185,12 +184,6 @@ const IssueForm = ({
                   ? "btn btn-outline-secondary"
                   : "btn btn-outline-success"
               }
-              style={{
-                cursor:
-                  userId === "" || returnDate === ""
-                    ? "not-allowed"
-                    : "default",
-              }}
               onClick={validate}
             >
               Validate
@@ -200,7 +193,7 @@ const IssueForm = ({
           {validated && (
             <button
               disabled={userId === "" || returnDate === ""}
-              className="btn btn-success"
+              className="btn btn-success "
               onClick={onIssue}
             >
               {type === "edit" ? "Edit" : "Issue"}

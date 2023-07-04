@@ -72,7 +72,7 @@ const BookForm = ({
           position: toast.POSITION.TOP_CENTER,
         });
       } else {
-        formData._id = selectedBook._id;
+        formData._id = selectedBook._id; //formData is an object that holds data for updating a book, and _id is a property used to uniquely identify the book.
         await UpdateBook(formData);
         toast.success("Book Updated successfully", {
           position: toast.POSITION.TOP_CENTER,
@@ -121,17 +121,15 @@ const BookForm = ({
                 />
               </div>
             </div>
-            <div className="row">
-              <div className="col-12 mb-2">
-                <span>Description</span>
-                <textarea
-                  className="form-control my-form-input"
-                  rows="4"
-                  name="description"
-                  value={description}
-                  onChange={changeHandler}
-                ></textarea>
-              </div>
+            <div className="col-12 mb-2">
+              <span>Description</span>
+              <textarea
+                className="form-control my-form-input"
+                rows="4"
+                name="description"
+                value={description}
+                onChange={changeHandler}
+              ></textarea>
             </div>
 
             <div className="col-12 mb-2">
@@ -155,19 +153,19 @@ const BookForm = ({
                 required
               >
                 <option value="">Select Category</option>
-                <option value="general">
+                <option value="General">
                   General-purpose programming languages
                 </option>
-                <option value="functional">
+                <option value="Functional">
                   Functional programming languages
                 </option>
-                <option value="oops">
+                <option value="Oops">
                   Object-oriented programming languages
                 </option>
-                <option value="web">Web development languages</option>
-                <option value="data">Data-focused languages</option>
-                <option value="compiled">Compiled languages</option>
-                <option value="markup">Markup languages</option>
+                <option value="Web">Web development languages</option>
+                <option value="Data">Data-focused languages</option>
+                <option value="Compiled">Compiled languages</option>
+                <option value="Markup">Markup languages</option>
               </select>
             </div>
             <div className="row mb-2">
@@ -245,3 +243,10 @@ const BookForm = ({
 };
 
 export default BookForm;
+
+/*
+toISOString(): The toISOString() method converts the Date object to a string representation in ISO 8601 format.
+
+.split("T")[0]: The split("T") method splits the string at the "T" delimiter, which separates the date and time in the ISO 8601 format. 
+[0] retrieves the first element of the resulting array, which represents the date portion.
+ */

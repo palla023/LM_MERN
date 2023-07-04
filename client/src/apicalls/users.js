@@ -67,7 +67,7 @@ export const GetLoggedInUserDetails = async () => {
     );
     return response.data;
   } catch (error) {
-    console.error("GetLoggedInUser Error:", error);
+    console.log("GetLoggedInUser Error:", error);
     throw error;
   }
 };

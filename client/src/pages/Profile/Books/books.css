@@ -60,11 +60,18 @@ i {
 	border-radius: 4px;
 	margin-left: 25%
 }
-.validateduserdiv{
+
+.validateduserdiv {
 	background-color: #626361;
 	padding: 10px;
 	color: white;
 }
-.validateduserdiv h1{
+
+.validateduserdiv h1 {
 	font-size: 15px;
+}
+
+.disbuttonstate{
+	cursor: not-allowed !important;
+	opacity: 0.6;
 }

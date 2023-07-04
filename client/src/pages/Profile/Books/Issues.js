@@ -18,7 +18,7 @@ const Issues = ({ open = false, setOpen, selectedBook, reloadBooks }) => {
     try {
       dispatch(ShowLoading());
       const response = await GetIssues({
-        book: selectedBook._id,
+        book: selectedBook._id,  // By filtering method, we can get the issues from database
       });
       dispatch(HideLoading());
       if (response.success) {
@@ -75,6 +75,7 @@ const Issues = ({ open = false, setOpen, selectedBook, reloadBooks }) => {
         message.success(response.message);
         getIssues();
         reloadBooks();
+        setOpen(false);
       } else {
         message.error(response.message);
       }

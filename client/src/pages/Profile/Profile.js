@@ -12,7 +12,7 @@ const Profile = () => {
   const { user } = useSelector((state) => state.users);
   const role = user.role;
   return (
-    <div className="">
+    <div>
       <Tabs defaultActiveKey="1">
         <TabPane tab="General" key="1">
           <BasicDetails />

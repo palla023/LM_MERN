@@ -19,7 +19,7 @@ const Users = ({ role }) => {
   const getUsers = async () => {
     try {
       dispatch(ShowLoading());
-      const response = await GetAllUsers(role);
+      const response = await GetAllUsers(role);     
       dispatch(HideLoading());
       setUsers(response.users);
     } catch (error) {
@@ -60,7 +60,6 @@ const Users = ({ role }) => {
             <tr>
               <th>Id</th>
               <th>Name</th>
-              <th>Role</th>
               <th>Email</th>
               <th>Phone</th>
               <th>createdAt</th>
@@ -74,7 +73,6 @@ const Users = ({ role }) => {
                 <tr key={user._id} className="align-middle">
                   <td>{user._id}</td>
                   <td>{user.name}</td>
-                  <td>{user.role}</td>
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
                   <td>{moment(user.createdAt).format("DD-MM-YYYY")}</td>

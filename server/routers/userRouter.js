@@ -85,7 +85,7 @@ router.get("/getLoggedInUserDetails", middleware, async (req, res) => {
   }
 });
 
-// get all the users (patrons)
+// get all the users (UsersRole)
 router.get("/get-all-users/:role", middleware, async (req, res) => {
   try {
     const users = await User.find({ role: req.params.role }).sort({
@@ -99,7 +99,7 @@ router.get("/get-all-users/:role", middleware, async (req, res) => {
     return res.status(500).send("Internal Server Error");
   }
 });
-// get user by id
+
 // get user by id
 router.get("/getUserById/:id", middleware, async (req, res) => {
   try {
