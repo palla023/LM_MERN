@@ -41,10 +41,14 @@ const Home = () => {
     const searchTerm = e.target.value.toLowerCase();
     setSearchTerm(searchTerm);
 
-    const filteredBooks = cloneBooks.filter((book) =>
-      book.title.toLowerCase().includes(searchTerm)
-    );
-    setBooks(filteredBooks);
+    if (searchTerm === "") {
+      setBooks(cloneBooks);
+    } else {
+      const filteredBooks = cloneBooks.filter((book) =>
+        book.title.toLowerCase().includes(searchTerm)
+      );
+      setBooks(filteredBooks);
+    }
   };
 
   return (
@@ -61,8 +65,8 @@ const Home = () => {
               />
               <button
                 className="btn btn-primary"
-                type="button"
-                onClick={getBooks}
+                type="submit"
+                onClick={handleSearch}
               >
                 Search
               </button>
@@ -77,10 +81,7 @@ const Home = () => {
               onClick={() => navigate(`/book/${book._id}`)}
             >
               <div className="card d-flex shadow" style={{ width: "21rem" }}>
-                <img
-                  src={book.image}
-                  alt="Card Image"
-                />
+                <img src={book.image} alt="Card Image" />
                 <div className="card-content p-3">
                   <h1 className="book-description">{book.title}</h1>
                   <div
