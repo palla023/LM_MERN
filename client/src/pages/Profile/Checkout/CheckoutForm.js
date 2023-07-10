@@ -10,8 +10,8 @@ import {
   getCartItemsByUser,
   decreaseCartItemQuantity,
 } from "../../../apicalls/cartItems";
-import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
 import { message } from "antd";
+import { HideLoading, ShowLoading } from "../../../redux/loadersSlice";
 
 const CheckoutForm = () => {
   const user = useSelector((state) => state.users.user);
@@ -21,38 +21,6 @@ const CheckoutForm = () => {
   const [cartItems, setCartItems] = useState([]);
   const [cartQuantity, setCartQuantity] = useState(0);
   const [cartPrice, setCartPrice] = useState(0);
-
-  const handleIncreaseQuantity = async (bookId) => {
-    try {
-      await addToCart(bookId, userId);
-      dispatch(updateQuantity({ bookId, quantity: 1 }));
-      loadCartItems(); // Refresh cart items after updating quantity
-    } catch (error) {
-      console.error("Failed to add item to cart:", error);
-    }
-  };
-
-  const handleDecreaseQuantity = async (bookId) => {
-    try {
-      const cartItem = cartItems.find((item) => item.bookId._id === bookId);
-      if (!cartItem) {
-        return;
-      }
-  
-      if (cartItem.quantity === 1) {
-        dispatch(removeBook(bookId));
-        await removeCartItem(cartItem._id);
-        loadCartItems();
-      } else if (cartItem.quantity > 1) {
-        await decreaseCartItemQuantity(cartItem._id);
-        dispatch(updateQuantity({ bookId, quantity: cartItem.quantity - 1 }));
-        loadCartItems();
-      }
-    } catch (error) {
-      console.error("Failed to decrease item quantity:", error);
-    }
-  };
-  
 
   const loadCartItems = async () => {
     try {
@@ -71,7 +39,6 @@ const CheckoutForm = () => {
       setCartQuantity(quantity);
       setCartPrice(price);
     } catch (error) {
-      dispatch(HideLoading());
       message.error(error.message);
     }
   };
@@ -79,6 +46,39 @@ const CheckoutForm = () => {
   useEffect(() => {
     loadCartItems();
   }, []);
+
+  const handleIncreaseQuantity = async (bookId) => {
+    try {
+      await addToCart(bookId, userId);
+      dispatch(updateQuantity({ bookId, quantity: 1 }));
+      loadCartItems(); // Refresh cart items after updating quantity
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+    }
+  };
+
+  const handleDecreaseQuantity = async (bookId) => {
+    try {
+      const cartItem = cartItems.find((item) => item.bookId._id === bookId);
+      if (!cartItem) {
+        return;
+      }
+
+      const updatedQuantity = cartItem.quantity - 1;
+
+      if (updatedQuantity <= 0) {
+        dispatch(removeBook(bookId));
+        await removeCartItem(cartItem._id);
+        loadCartItems();
+      } else {
+        await decreaseCartItemQuantity(cartItem._id, updatedQuantity);
+        dispatch(updateQuantity({ bookId, quantity: updatedQuantity }));
+        loadCartItems();
+      }
+    } catch (error) {
+      console.error("Failed to decrease item quantity:", error);
+    }
+  };
 
   return (
     <div>
@@ -119,39 +119,41 @@ const CheckoutForm = () => {
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((cartItem) => (
-                  <tr key={cartItem._id} className="align-middle text-center">
-                    <td>
-                      <img
-                        src={cartItem.bookId.image}
-                        alt="book"
-                        className="checkoutImage"
-                      />
-                    </td>
-                    <td>{cartItem.bookId.title}</td>
-                    <td>Rs. {cartItem.bookId.Price}</td>
-                    <td>
-                      <div className="d-flex flex-row align-items-center justify-content-center gap-1">
-                        <span>{cartItem.quantity}</span>
-                        <span className="d-flex flex-column">
-                          <i
-                            className="ri-arrow-drop-up-fill iconChange"
-                            onClick={() =>
-                              handleIncreaseQuantity(cartItem.bookId._id)
-                            }
-                          ></i>
-                          <i
-                            className="ri-arrow-drop-down-fill iconChange iconHeightAdj"
-                            onClick={() =>
-                              handleDecreaseQuantity(cartItem.bookId._id)
-                            }
-                          ></i>
-                        </span>
-                      </div>
-                    </td>
-                    <td>Rs. {cartItem.bookId.Price * cartItem.quantity}</td>
-                  </tr>
-                ))}
+                {cartItems
+                  .filter((cartItem) => cartItem.quantity > 0) // Filter out cart items with quantity zero
+                  .map((cartItem) => (
+                    <tr key={cartItem._id} className="align-middle text-center">
+                      <td>
+                        <img
+                          src={cartItem.bookId.image}
+                          alt="book"
+                          className="checkoutImage"
+                        />
+                      </td>
+                      <td>{cartItem.bookId.title}</td>
+                      <td>Rs. {cartItem.bookId.Price}</td>
+                      <td>
+                        <div className="d-flex flex-row align-items-center justify-content-center gap-1">
+                          <span>{cartItem.quantity}</span>
+                          <span className="d-flex flex-column">
+                            <i
+                              className="ri-arrow-drop-up-fill iconChange"
+                              onClick={() =>
+                                handleIncreaseQuantity(cartItem.bookId._id)
+                              }
+                            ></i>
+                            <i
+                              className="ri-arrow-drop-down-fill iconChange iconHeightAdj"
+                              onClick={() =>
+                                handleDecreaseQuantity(cartItem.bookId._id)
+                              }
+                            ></i>
+                          </span>
+                        </div>
+                      </td>
+                      <td>Rs. {cartItem.bookId.Price * cartItem.quantity}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

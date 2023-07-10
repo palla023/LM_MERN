@@ -5,9 +5,8 @@ const Book = require("../models/BookModel.js");
 const User = require("../models/UsersModel");
 const middleware = require("../middleware/middleware.js");
 
-
 // Add a book to the cart
-router.post("/cart/add",middleware, async (req, res) => {
+router.post("/cart/add", middleware, async (req, res) => {
   try {
     const { bookId } = req.body;
     const cartItem = await CartItem.findOne({ bookId, userId: req.user.id });
@@ -37,8 +36,13 @@ router.put("/cart/update/:cartItemId", middleware, async (req, res) => {
       return res.status(404).json({ error: "Cart item not found" });
     }
 
-    // Decrease the quantity by the desired value
-    cartItem.quantity -= quantity;
+    cartItem.quantity = quantity;
+
+    if (cartItem.quantity === 0) {
+      // Remove the cart item if the quantity is 0
+      await cartItem.remove();
+      return res.status(200).json({ message: "Cart item removed successfully" });
+    }
 
     await cartItem.save();
 
@@ -59,8 +63,8 @@ router.put("/cart/decreaseQuantity/:cartItemId", async (req, res) => {
       return res.status(404).json({ error: "Cart item not found" });
     }
 
-    if (cartItem.quantity === 1) {
-      // Remove the cart item if the quantity is 1
+    if (cartItem.quantity <= 1) {
+      // Remove the cart item if the quantity is 1 or less
       await cartItem.remove();
     } else {
       // Decrease the quantity by 1
@@ -76,7 +80,6 @@ router.put("/cart/decreaseQuantity/:cartItemId", async (req, res) => {
 });
 
 
-
 // Get cart items by user
 router.post("/cart/user", middleware, async (req, res) => {
   try {
@@ -84,7 +87,7 @@ router.post("/cart/user", middleware, async (req, res) => {
 
     const cartItems = await CartItem.find({ userId })
       .populate("bookId")
-      .populate("userId");
+      .populate("userId").sort({ createdAt: -1 });
 
     res.status(200).json(cartItems);
   } catch (error) {
@@ -92,15 +95,12 @@ router.post("/cart/user", middleware, async (req, res) => {
   }
 });
 
-
-
-
 // Remove a book from the cart
-router.delete("/cart/remove/:cartItemId",middleware, async (req, res) => {
+router.delete("/cart/remove/:cartItemId", middleware, async (req, res) => {
   try {
     const { cartItemId } = req.params;
 
-    const cartItem = await CartItem.findById(cartItemId);
+    const cartItem = await CartItem.findByIdAndDelete(cartItemId);
     if (!cartItem) {
       return res.status(404).json({ error: "Cart item not found" });
     }

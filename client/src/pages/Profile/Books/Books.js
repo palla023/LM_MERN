@@ -56,12 +56,8 @@ const Books = () => {
   const handleAddToCart = async (book) => {
     dispatch(ShowLoading());
     try {
-      // Make the API call to store the cart item in the database
-      await addToCart(book._id, userId); // Assuming you have the userId available
-  
-      // Dispatch the addBook action to update the Redux store
-      dispatch(addBook(book));
-  
+      await addToCart(book._id, userId);  
+      dispatch(addBook(book)); 
       notification.success({
         message: "Item added to cart",
         description: "The item has been added to your cart.",
@@ -76,6 +72,7 @@ const Books = () => {
       dispatch(HideLoading());
     }
   };
+  
   
   return (
     <div>
