@@ -9,7 +9,7 @@ const middleware = require("../middleware/middleware.js");
 router.post("/cart/add", middleware, async (req, res) => {
   try {
     const { bookId } = req.body;
-    const cartItem = await CartItem.findOne({ bookId, userId: req.user.id });
+    const cartItem = await CartItem.findOne({ bookId, userId: req.user.id }); // req.user.id middleware loggedinuser
 
     if (cartItem) {
       cartItem.quantity += 1;
