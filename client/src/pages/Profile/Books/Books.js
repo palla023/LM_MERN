@@ -10,8 +10,8 @@ import { HideLoading, ShowLoading } from "../../../redux/loadersSlice.js";
 import Issues from "./Issues.js";
 import IssueForm from "./IssueForm.js";
 import { addBook } from "../../../redux/bookSlice.js";
-import { notification } from "antd";
-import { addToCart } from "../../../apicalls/cartItems.js";
+import { message, notification } from "antd";
+import { addToCart, getCartItemsByUser } from "../../../apicalls/cartItems.js";
 const Books = () => {
   // const { user } = useSelector((state) => state.users); 
   const [formType, setFormType] = useState("add");
@@ -21,6 +21,10 @@ const Books = () => {
   const [openIssuesForm, setOpenIssuesForm] = useState(false);
   const [books, setBooks] = useState([]);
   const user = useSelector((state) => state.users.user);
+  const [cartItems, setCartItems] = useState([]);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const [cartPrice, setCartPrice] = useState(0);
+
   const userId = user._id;
   const dispatch = useDispatch();
   const getBooks = async () => {
@@ -53,11 +57,37 @@ const Books = () => {
     }
   };
 
+  const loadCartItems = async () => {
+    try {
+      dispatch(ShowLoading());
+      const response = await getCartItemsByUser(userId);
+      dispatch(HideLoading());
+      setCartItems(response);
+  
+      // Calculate cart quantity and price
+      let quantity = 0;
+      let price = 0;
+      response.forEach((item) => {
+        quantity += item.quantity;
+        price += item.bookId.Price * item.quantity;
+      });
+      setCartQuantity(quantity);
+      setCartPrice(price);
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
+  
+  useEffect(() => {
+    loadCartItems();
+  }, []);
+  
   const handleAddToCart = async (book) => {
     dispatch(ShowLoading());
     try {
-      await addToCart(book._id, userId);  
-      dispatch(addBook(book)); 
+      await addToCart(book._id, userId);
+      dispatch(addBook(book));
+      await loadCartItems(); // Wait for cart items to be updated
       notification.success({
         message: "Item added to cart",
         description: "The item has been added to your cart.",
