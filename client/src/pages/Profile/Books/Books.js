@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import BookForm from "./BookForm.js";
@@ -22,8 +23,6 @@ const Books = () => {
   const [books, setBooks] = useState([]);
   const user = useSelector((state) => state.users.user);
   const [cartItems, setCartItems] = useState([]);
-  const [cartQuantity, setCartQuantity] = useState(0);
-  const [cartPrice, setCartPrice] = useState(0);
 
   const userId = user._id;
   const dispatch = useDispatch();
@@ -63,16 +62,7 @@ const Books = () => {
       const response = await getCartItemsByUser(userId);
       dispatch(HideLoading());
       setCartItems(response);
-  
-      // Calculate cart quantity and price
-      let quantity = 0;
-      let price = 0;
-      response.forEach((item) => {
-        quantity += item.quantity;
-        price += item.bookId.Price * item.quantity;
-      });
-      setCartQuantity(quantity);
-      setCartPrice(price);
+ 
     } catch (error) {
       message.error(error.message);
     }
