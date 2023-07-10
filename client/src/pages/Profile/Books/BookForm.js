@@ -28,6 +28,7 @@ const BookForm = ({
     publishedDate: "",
     rentPerDay: "",
     totalCopies: "",
+    Price:""
   });
   useEffect(() => {
     if (selectedBook) {
@@ -43,6 +44,7 @@ const BookForm = ({
           : null,
         rentPerDay: selectedBook.rentPerDay,
         totalCopies: selectedBook.totalCopies,
+        Price:selectedBook.Price,
       });
     }
   }, [selectedBook]);
@@ -56,6 +58,7 @@ const BookForm = ({
     publishedDate,
     rentPerDay,
     totalCopies,
+    Price,
   } = formData;
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -95,6 +98,7 @@ const BookForm = ({
       publishedDate: "",
       rentPerDay: "",
       totalCopies: "",
+      Price:"",
     });
   };
   return (
@@ -202,7 +206,7 @@ const BookForm = ({
             </div>
 
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <span>Rent</span>
                 <input
                   type="text"
@@ -212,13 +216,23 @@ const BookForm = ({
                   onChange={changeHandler}
                 />
               </div>
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <span>Total Copies</span>
                 <input
                   type="text"
                   className="form-control my-form-input"
                   name="totalCopies"
                   value={totalCopies}
+                  onChange={changeHandler}
+                />
+              </div>
+              <div className="col-md-4">
+                <span>Price</span>
+                <input
+                  type="text"
+                  className="form-control my-form-input"
+                  name="Price"
+                  value={Price}
                   onChange={changeHandler}
                 />
               </div>

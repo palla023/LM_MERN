@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader";
 import Profile from "./pages/Profile/Profile";
 import BookDescription from "./pages/BookDescription/BookDescription";
+import CheckoutForm from "./pages/Profile/Checkout/CheckoutForm";
 function App() {
   const loading = useSelector((state) => state.loaders.loading);
   return (
@@ -36,6 +37,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />{" "}
+              </ProtectedRoute>
+            }
+            exact
+          />
+           <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <CheckoutForm />{" "}
               </ProtectedRoute>
             }
             exact

@@ -47,6 +47,9 @@ const bookSchema = new mongoose.Schema(
       ref: "users",
       required: true,
     },
+    Price:{
+      type:Number,
+    }
   },
   {
     timestamps: true,

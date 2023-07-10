@@ -1,0 +1,13 @@
+.checkoutImage{
+    height: 85px !important;
+    width: 85px !important;
+}
+.iconChage{
+    padding:0;
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.iconheightadj{
+    margin-top: -20px;
+}

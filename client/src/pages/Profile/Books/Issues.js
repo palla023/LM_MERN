@@ -8,6 +8,7 @@ import { DeleteIssue, GetIssues, ReturnBook } from "../../../apicalls/issues";
 import moment from "moment";
 import IssueForm from "./IssueForm";
 
+
 const Issues = ({ open = false, setOpen, selectedBook, reloadBooks }) => {
   const [issues, setIssues] = useState([]);
   const [selectedIssue, setSelectedIssue] = useState(null);
@@ -91,7 +92,7 @@ const Issues = ({ open = false, setOpen, selectedBook, reloadBooks }) => {
       open={open}
       onCancel={() => setOpen(false)}
       footer={null}
-      width={1400}
+      width={1800}
       centered
     >
       <h1 className="text-secondary issuebookheading">

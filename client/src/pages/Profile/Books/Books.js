@@ -4,18 +4,24 @@ import BookForm from "./BookForm.js";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GetBooks, DeleteBook } from "../../../apicalls/books.js";
 import { HideLoading, ShowLoading } from "../../../redux/loadersSlice.js";
 import Issues from "./Issues.js";
 import IssueForm from "./IssueForm.js";
+import { addBook } from "../../../redux/bookSlice.js";
+import { notification } from "antd";
+import { addToCart } from "../../../apicalls/cartItems.js";
 const Books = () => {
+  // const { user } = useSelector((state) => state.users); 
   const [formType, setFormType] = useState("add");
   const [selectedBook, setSelectedBook] = useState(null);
   const [openBookForm, setOpenBookForm] = useState(false);
   const [openIssues, setOpenIssues] = useState(false);
   const [openIssuesForm, setOpenIssuesForm] = useState(false);
   const [books, setBooks] = useState([]);
+  const user = useSelector((state) => state.users.user);
+  const userId = user._id;
   const dispatch = useDispatch();
   const getBooks = async () => {
     try {
@@ -46,6 +52,31 @@ const Books = () => {
       console.log(err);
     }
   };
+
+  const handleAddToCart = async (book) => {
+    dispatch(ShowLoading());
+    try {
+      // Make the API call to store the cart item in the database
+      await addToCart(book._id, userId); // Assuming you have the userId available
+  
+      // Dispatch the addBook action to update the Redux store
+      dispatch(addBook(book));
+  
+      notification.success({
+        message: "Item added to cart",
+        description: "The item has been added to your cart.",
+      });
+    } catch (error) {
+      console.error("Failed to add item to cart:", error);
+      notification.error({
+        message: "Failed to add item to cart",
+        description: error.message,
+      });
+    } finally {
+      dispatch(HideLoading());
+    }
+  };
+  
   return (
     <div>
       <div className="d-flex justify-content-end ">
@@ -66,14 +97,13 @@ const Books = () => {
             <tr className="text-center">
               <th>Book</th>
               <th>Title</th>
-              <th>Category</th>
               <th>Author</th>
-              <th>Publisher</th>
               <th>Total Copies</th>
               <th>Available Copies</th>
               <th>createdAt</th>
               <th>Actions</th>
               <th>Issue Actions</th>
+              <th>CartActions</th>
             </tr>
           </thead>
           <tbody>
@@ -84,9 +114,7 @@ const Books = () => {
                     <img src={book.image} alt="book" width="70" height="80" />{" "}
                   </td>
                   <td>{book.title}</td>
-                  <td>{book.category}</td>
                   <td>{book.author}</td>
-                  <td>{book.publisher}</td>
                   <td>{book.totalCopies}</td>
                   <td>{book.availableCopies}</td>
                   <td>{moment(book.createdAt).format("DD-MM-YYYY")}</td>
@@ -124,6 +152,9 @@ const Books = () => {
                       Issue Book
                     </span>
                   </td>
+                 <td>
+                 <button className="btn btn-primary" onClick={() => handleAddToCart(book)}>Add to Cart</button>
+                 </td>
                 </tr>
               ))}
           </tbody>

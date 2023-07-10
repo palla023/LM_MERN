@@ -24,13 +24,17 @@ router.get("/get-reports", middleware, async (req, res) => {
     const users = await User.find();
     const totalUsersCount = users.length;
     const usersCount = users.filter((user) => user.role === "user").length;
-    const librariansCount = users.filter((user) => user.role === "librarian").length;
+    const librariansCount = users.filter(
+      (user) => user.role === "librarian"
+    ).length;
     const adminsCount = users.filter((user) => user.role === "admin").length;
 
     // issues report
     const issues = await Issue.find();
     const issuesCount = issues.length;
-    const returnedIssuesCount = issues.filter((issue) => issue.returnedDate !== null).length;
+    const returnedIssuesCount = issues.filter(
+      (issue) => issue.returnedDate !== null
+    ).length;
     const pendingIssuesCount = issuesCount - returnedIssuesCount;
 
     // revenue report
