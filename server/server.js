@@ -29,15 +29,16 @@ app.use("/api", cartItemRouter);
 const path = require("path");
 __dirname = path.resolve();
 
+// Serve static files only in production
 if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, "/client/build")));
+  // Set static folder to serve from the client/build directory
+  app.use(express.static(path.join(__dirname, "../client/build")));
 
-  // index.html for all page routes
+  // Serve the index.html file for any route
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
   });
-}}
+}
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server listening on ${process.env.PORT} ...`);
