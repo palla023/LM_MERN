@@ -27,15 +27,17 @@ app.use("/api/reports", reportsRouter);
 app.use("/api", cartItemRouter);
 
 const path = require("path");
- __dirname = path.resolve();
-if (process.env.NODE_ENV !== "production") {
-  //set static folder
+__dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
   app.use(express.static(path.join(__dirname, "/client/build")));
-  //index.html for all the routes
+
+  // index.html for all page routes
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  })
-}
+  });
+}}
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server listening on ${process.env.PORT} ...`);
