@@ -90,8 +90,8 @@ router.post("/delete-issue", middleware, async (req, res) => {
     // inventory adjustment (available copies must be incremented by 1)
     await Book.findOneAndUpdate(
       {
-        _id: req.body.book._id,
-        availableCopies: { $lt: req.body.book.totalCopies },
+        _id: req.body.book,
+        // availableCopies: { $lt: req.body.book.totalCopies },
       },
       { $inc: { availableCopies: 1 } }
     );
