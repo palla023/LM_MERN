@@ -26,7 +26,6 @@ app.use("/api/issues", issuesRouter);
 app.use("/api/reports", reportsRouter);
 app.use("/api", cartItemRouter);
 
-<<<<<<< HEAD
 // const path = require("path");
 //  __dirname = path.resolve();
 // if (process.env.NODE_ENV !== "production") {
