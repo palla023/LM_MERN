@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000";
+// const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://lm-mern.onrender.com";
 
 // Add an item to the cart
 export const addToCart = async (bookId, userId) => {

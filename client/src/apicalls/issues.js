@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000";
-// const API_BASE_URL = "https://library-management-dqov.onrender.com";
+// const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://lm-mern.onrender.com";
 
 // issue a book
 export const IssueBook = async (payload) => {
