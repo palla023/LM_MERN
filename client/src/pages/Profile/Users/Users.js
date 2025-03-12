@@ -76,7 +76,7 @@ const Users = ({ role }) => {
                   <td>{user.email}</td>
                   <td>{user.phone}</td>
                   <td>{moment(user.createdAt).format("DD-MM-YYYY")}</td>
-               { role === user && (   <td>
+                  <td>
                     <button
                       className="btn btn-outline-primary"
                       onClick={() => {
@@ -86,7 +86,7 @@ const Users = ({ role }) => {
                     >
                       Books
                     </button>
-                  </td> ) }
+                  </td> 
                   <td className='box'>
                     <select
                       value={user.role}
