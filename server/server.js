@@ -26,6 +26,7 @@ app.use("/api/issues", issuesRouter);
 app.use("/api/reports", reportsRouter);
 app.use("/api", cartItemRouter);
 
+<<<<<<< HEAD
 const path = require("path");
 __dirname = path.resolve();
 
@@ -39,6 +40,27 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
   });
 }
+=======
+// const path = require("path");
+//  __dirname = path.resolve();
+// if (process.env.NODE_ENV !== "production") {
+//   //set static folder
+//   app.use(express.static(path.join(__dirname, "/client/build")));
+//   //index.html for all the routes
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   })
+// }
+const path = require('path');
+__dirname = path.resolve();
+// Serve static files from the React app build folder
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
+>>>>>>> 536783fbdb73c2d86f6c58c584d2516cc8a7e229
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server listening on ${process.env.PORT} ...`);
