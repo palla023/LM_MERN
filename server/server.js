@@ -45,21 +45,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-=======
-const path = require("path");
-__dirname = path.resolve();
-
-// Serve static files only in production
-if (process.env.NODE_ENV === "production") {
-  // Set static folder to serve from the client/build directory
-  app.use(express.static(path.join(__dirname, "../client/build")));
-
-  // Serve the index.html file for any route
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-  });
-}
->>>>>>> 697941c79babcebce6d261a22e0c8e357e3e57aa
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server listening on ${process.env.PORT} ...`);
