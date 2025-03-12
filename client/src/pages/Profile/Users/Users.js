@@ -64,7 +64,6 @@ const Users = ({ role }) => {
               <th>Phone</th>
               <th>createdAt</th>
               <th>Actions</th> 
-            // { role === user && ( <th>Actions</th> ) }
               <th>Change Role</th>
             </tr>
           </thead>
